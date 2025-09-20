@@ -38,6 +38,49 @@
     --shadow: 0 6px 18px rgba(0,0,0,.25);
   }
   * { box-sizing: border-box; }
+
+<script>
+/* ===== Force-load JSON into the editor's localStorage, then reload once ===== */
+(function () {
+  const MARKER = 'RLM_JSON_LOADED_ONCE';
+  const DATA_URL = './data/race-league-manager.json';
+
+  // If we've already injected once, don't loop reloads
+  if (sessionStorage.getItem(MARKER)) return;
+
+  // Helper: set JSON to any likely storage keys used by the app
+  function writeToLikelyKeys(jsonStr) {
+    const likelyKeys = new Set([
+      'race-league-manager-state',
+      'raceLeagueManagerState',
+      'RLM_STATE',
+      'RaceLeagueManager',
+      'appState'
+    ]);
+    // also include any existing keys that look related
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (/(race|league|manager|rlm).*state/i.test(k)) likelyKeys.add(k);
+    }
+    likelyKeys.forEach(k => localStorage.setItem(k, jsonStr));
+  }
+
+  // Fetch your repo JSON and store it so the editor build will use it
+  fetch(DATA_URL, { cache: 'no-store' })
+    .then(r => r.json())
+    .then(obj => {
+      const jsonStr = JSON.stringify(obj);
+      writeToLikelyKeys(jsonStr);
+      // Mark so we only reload once
+      sessionStorage.setItem(MARKER, '1');
+      // Reload so the original appboots from localStorage with your data
+      location.reload();
+    })
+    .catch(err => console.error('Failed to fetch JSON:', err));
+})();
+</script>
+
+  
   body { margin:0; padding:0; background: var(--bg); color: var(--text);
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
   }
@@ -1171,49 +1214,6 @@ function drawLifetimeChart(){
           const isTab = el.closest('#tabs');
           const isThemeToggle = el.id === 'themeToggle';
           if (!isTab && !isThemeToggle) {
-            el.disabled = true;
-            el.style.pointerEvents = 'none';
-            el.style.opacity = '0.6';
-          }
-        });
-      })
-      .catch(err => console.error('Failed to load data', err));
-  });
-</script>
-
-  <script>
-  // === Read-Only Viewer Injection ===
-  window.READ_ONLY = true;
-  window.DATA_URL = './data/race-league-manager.json';
-
-  function saveState() {
-    if (window.READ_ONLY) return; // disable saving online
-  }
-
-  window.addEventListener('load', function () {
-    fetch(window.DATA_URL)
-      .then(r => r.json())
-      .then(json => {
-        window.app = json;
-        if (typeof refreshSeasonSelect === 'function') refreshSeasonSelect();
-        if (typeof applyTheme === 'function') applyTheme();
-        if (typeof renderAll === 'function') renderAll();
-
-        // Hide editing buttons
-        const idsToHide = [
-          'newSeasonBtn','cloneSeasonBtn','renameSeasonBtn','reorderSeasonsBtn','deleteSeasonBtn',
-          'exportBtn','importInput','addDriverBtn','addRaceBtn','resetPointsBtn','extendPointsBtn','saveRulesBtn'
-        ];
-        idsToHide.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.style.display = 'none';
-        });
-
-        // Disable all form inputs so it's view-only
-        document.querySelectorAll('input, textarea, select, button').forEach(el => {
-          const isTabBar = el.closest('#tabs');
-          const isThemeToggle = el.id === 'themeToggle';
-          if (!isTabBar && !isThemeToggle) {
             el.disabled = true;
             el.style.pointerEvents = 'none';
             el.style.opacity = '0.6';
