@@ -1181,5 +1181,48 @@ function drawLifetimeChart(){
   });
 </script>
 
+  <script>
+  // === Read-Only Viewer Injection ===
+  window.READ_ONLY = true;
+  window.DATA_URL = './data/race-league-manager.json';
+
+  function saveState() {
+    if (window.READ_ONLY) return; // disable saving online
+  }
+
+  window.addEventListener('load', function () {
+    fetch(window.DATA_URL)
+      .then(r => r.json())
+      .then(json => {
+        window.app = json;
+        if (typeof refreshSeasonSelect === 'function') refreshSeasonSelect();
+        if (typeof applyTheme === 'function') applyTheme();
+        if (typeof renderAll === 'function') renderAll();
+
+        // Hide editing buttons
+        const idsToHide = [
+          'newSeasonBtn','cloneSeasonBtn','renameSeasonBtn','reorderSeasonsBtn','deleteSeasonBtn',
+          'exportBtn','importInput','addDriverBtn','addRaceBtn','resetPointsBtn','extendPointsBtn','saveRulesBtn'
+        ];
+        idsToHide.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = 'none';
+        });
+
+        // Disable all form inputs so it's view-only
+        document.querySelectorAll('input, textarea, select, button').forEach(el => {
+          const isTabBar = el.closest('#tabs');
+          const isThemeToggle = el.id === 'themeToggle';
+          if (!isTabBar && !isThemeToggle) {
+            el.disabled = true;
+            el.style.pointerEvents = 'none';
+            el.style.opacity = '0.6';
+          }
+        });
+      })
+      .catch(err => console.error('Failed to load data', err));
+  });
+</script>
+
 </body>
 </html>
