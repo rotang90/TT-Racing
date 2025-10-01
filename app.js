@@ -247,7 +247,7 @@ function renderLifetimeCard() {
 
 function renderTabs() {
   // refresh tab button active state inside .tabs
-  const tabsEl = $('.tabs');
+  const tabsEl = document.querySelector('.tabs');
   if (!tabsEl) return;
   tabsEl.innerHTML = [
     renderTabButton('standings','Standings'),
