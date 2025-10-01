@@ -244,6 +244,19 @@ function renderLifetimeCard() {
   </div>`;
 }
 
+
+function renderTabs() {
+  // refresh tab button active state inside .tabs
+  const tabsEl = $('.tabs');
+  if (!tabsEl) return;
+  tabsEl.innerHTML = [
+    renderTabButton('standings','Standings'),
+    renderTabButton('schedule','Schedule'),
+    renderTabButton('drivers','Drivers'),
+    renderTabButton('lifetime','Lifetime Stats')
+  ].join('');
+}
+
 // ---------- Calculation Engine ----------
 
 function computeSeason(season) {
