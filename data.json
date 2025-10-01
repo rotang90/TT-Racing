@@ -1473,20 +1473,6 @@
           "number": "4",
           "color": "#757575",
           "active": true
-        },
-        {
-          "id": "4da26y3",
-          "name": "Daniel Pineda",
-          "number": "999",
-          "color": "#10cb14",
-          "active": false
-        },
-        {
-          "id": "nqix6xm",
-          "name": "Andrew West",
-          "number": "888",
-          "color": "#d8e708",
-          "active": false
         }
       ],
       "schedule": [
@@ -1582,12 +1568,6 @@
             "kwwtsni": {
               "qualiPos": 6,
               "racePos": 6
-            },
-            "nqix6xm": {
-              "qualiPos": "",
-              "racePos": "",
-              "qDNP": false,
-              "dnf": false
             }
           },
           "adjustments": {}
@@ -1595,13 +1575,13 @@
         {
           "raceId": "6epug6w",
           "byDriver": {
-            "2yl1y7b": {
-              "qualiPos": 9,
-              "racePos": 7
-            },
             "ji2ye5y": {
               "qualiPos": 1,
               "racePos": 1
+            },
+            "2yl1y7b": {
+              "qualiPos": 9,
+              "racePos": 7
             },
             "yywv2ho": {
               "qualiPos": 2,
