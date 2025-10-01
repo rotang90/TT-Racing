@@ -1,18 +1,13 @@
-# TT Racing — Always-Up-To-Date Viewer
+# TT Racing — Read‑Only Viewer
 
-This package **always checks** `data.json` and reloads the page if your results changed, so your friends see the latest automatically.
+This build keeps your portal's look, keeps **Theme**, allows switching **Season** and **Tabs**, but blocks edits:
+- Hidden: New/Clone/Rename/Reorder/Delete Season, Import.
+- Disabled: inputs, checkboxes, drag/drop on Results/Drivers.
+- Always fetches `data.json` and reloads when it changes.
 
 ## Deploy
-1) Upload `index.html` and `data.json` to your repo root (replace existing).
-2) Commit to `main`. Ensure GitHub Pages is set to Deploy from branch → `main` → root.
-3) Visit your site normally. The page will auto-sync to the newest results.
+1) Upload `index.html` and `data.json` (replace) to your repo root and commit to `main`.
+2) Ensure GitHub Pages → Deploy from branch → `main` → root.
+3) Share the Pages URL. A badge bottom-left shows “Read-only viewer” and last sync time.
 
-## Manual refresh
-There is a **Refresh Data** button (bottom-right). Clicking it forces a check now.
-
-## Troubleshooting (friends not seeing updates)
-- Have them hard-reload: Windows `Ctrl+Shift+R`, Mac `Cmd+Shift+R`.
-- Or clear storage for the site: open DevTools → Application/Storage → Clear site data.
-- Direct link to trigger clean load: add `?v=` with a new number, e.g., `...?v=2`.
-
-This viewer stores a small meta hash of your `data.json`. When your JSON changes, everyone’s page updates itself.
+Tip: After you upload a new `data.json`, open the site once with `?v=2` to nudge caches.
