@@ -43,7 +43,7 @@
 /* ===== Force-load JSON into the editor's localStorage, then reload once ===== */
 (function () {
   const MARKER = 'RLM_JSON_LOADED_ONCE';
-  const DATA_URL = './data/race-league-manager.json';
+  const DATA_URL = 'data.json';
 
   // If we've already injected once, don't loop reloads
   if (sessionStorage.getItem(MARKER)) return;
