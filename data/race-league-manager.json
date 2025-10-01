@@ -1473,6 +1473,20 @@
           "number": "4",
           "color": "#757575",
           "active": true
+        },
+        {
+          "id": "4da26y3",
+          "name": "Daniel Pineda",
+          "number": "999",
+          "color": "#10cb14",
+          "active": false
+        },
+        {
+          "id": "nqix6xm",
+          "name": "Andrew West",
+          "number": "888",
+          "color": "#d8e708",
+          "active": false
         }
       ],
       "schedule": [
@@ -1490,7 +1504,7 @@
           "track": "Dragin Trail - Gardens",
           "raceDate": "2025-09-30T04:00:00.000Z",
           "practiceDate": "2025-09-23T04:00:00.000Z",
-          "includeInStats": false
+          "includeInStats": true
         },
         {
           "id": "72te28x",
@@ -1568,13 +1582,56 @@
             "kwwtsni": {
               "qualiPos": 6,
               "racePos": 6
+            },
+            "nqix6xm": {
+              "qualiPos": "",
+              "racePos": "",
+              "qDNP": false,
+              "dnf": false
             }
           },
           "adjustments": {}
         },
         {
           "raceId": "6epug6w",
-          "byDriver": {},
+          "byDriver": {
+            "2yl1y7b": {
+              "qualiPos": 9,
+              "racePos": 7
+            },
+            "ji2ye5y": {
+              "qualiPos": 1,
+              "racePos": 1
+            },
+            "yywv2ho": {
+              "qualiPos": 2,
+              "racePos": 3
+            },
+            "qpeqhcc": {
+              "qualiPos": 4,
+              "racePos": 2
+            },
+            "e1d4qi3": {
+              "qualiPos": 3,
+              "racePos": 5
+            },
+            "kwwtsni": {
+              "qualiPos": 8,
+              "racePos": 8
+            },
+            "t015pcd": {
+              "qualiPos": 7,
+              "racePos": 9
+            },
+            "9gzdt6u": {
+              "qualiPos": 6,
+              "racePos": 6
+            },
+            "s9fn2f4": {
+              "qualiPos": 5,
+              "racePos": 4
+            }
+          },
           "adjustments": {}
         },
         {
