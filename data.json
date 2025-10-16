@@ -1415,7 +1415,7 @@
           "id": "2yl1y7b",
           "name": "Aaron Koepper",
           "number": "69",
-          "color": "#c000de",
+          "color": "#ee80ff",
           "active": true
         },
         {
@@ -1450,7 +1450,7 @@
           "id": "t015pcd",
           "name": "Scott Holder",
           "number": "28-3",
-          "color": "#ff0000",
+          "color": "#01cdd0",
           "active": true
         },
         {
@@ -1498,7 +1498,7 @@
           "track": "Barcelona - National Layout",
           "raceDate": "2025-10-14T04:00:00.000Z",
           "practiceDate": "2025-10-07T04:00:00.000Z",
-          "includeInStats": false
+          "includeInStats": true
         },
         {
           "id": "i0lisr6",
@@ -1575,13 +1575,13 @@
         {
           "raceId": "6epug6w",
           "byDriver": {
-            "ji2ye5y": {
-              "qualiPos": 1,
-              "racePos": 1
-            },
             "2yl1y7b": {
               "qualiPos": 9,
               "racePos": 7
+            },
+            "ji2ye5y": {
+              "qualiPos": 1,
+              "racePos": 1
             },
             "yywv2ho": {
               "qualiPos": 2,
@@ -1616,8 +1616,52 @@
         },
         {
           "raceId": "72te28x",
-          "byDriver": {},
-          "adjustments": {}
+          "byDriver": {
+            "2yl1y7b": {
+              "qualiPos": 8,
+              "racePos": 8
+            },
+            "ji2ye5y": {
+              "qualiPos": 3,
+              "racePos": 1
+            },
+            "yywv2ho": {
+              "qualiPos": 2,
+              "racePos": 3
+            },
+            "qpeqhcc": {
+              "qualiPos": 1,
+              "racePos": 2
+            },
+            "e1d4qi3": {
+              "qualiPos": 4,
+              "racePos": 4
+            },
+            "kwwtsni": {
+              "qualiPos": 7,
+              "racePos": 7
+            },
+            "t015pcd": {
+              "qualiPos": 9,
+              "racePos": 9,
+              "qDNP": true,
+              "dnf": true
+            },
+            "9gzdt6u": {
+              "qualiPos": 6,
+              "racePos": 6
+            },
+            "s9fn2f4": {
+              "qualiPos": 5,
+              "racePos": 5
+            }
+          },
+          "adjustments": {
+            "yywv2ho": {
+              "points": 1,
+              "note": "Fastest Lap"
+            }
+          }
         },
         {
           "raceId": "i0lisr6",
@@ -1667,7 +1711,7 @@
           0
         ]
       },
-      "rules": "Vehicle: Mazda NR-A Miata (Custom Tune)\nAvailable Tires:\nQuali Time: 10 mins\nRace Time: 30 mins\nPit window: N/A\nRequires Tires: N/A",
+      "rules": "Vehicle: Mazda NR-A Miata (Custom Tune)\nAvailable Tires: Racing Soft, Intermediate, Wet\nQuali Time: 10 mins\nRace Time: 30 mins\nPit window: N/A\nRequires Tires: N/A",
       "seasonNo": 7
     }
   ],
