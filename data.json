@@ -913,7 +913,7 @@
           "id": "by19ywi",
           "name": "Daniel Pineda",
           "number": "9",
-          "color": "#ff0000",
+          "color": "#0091ff",
           "active": true
         },
         {
@@ -1415,7 +1415,7 @@
           "id": "2yl1y7b",
           "name": "Aaron Koepper",
           "number": "69",
-          "color": "#ee80ff",
+          "color": "#e44bfb",
           "active": true
         },
         {
@@ -1471,7 +1471,14 @@
           "id": "kwwtsni",
           "name": "Ryan Eng",
           "number": "4",
-          "color": "#757575",
+          "color": "#ff0000",
+          "active": true
+        },
+        {
+          "id": "784o53b",
+          "name": "Andrew West",
+          "number": "17",
+          "color": "#e06c00",
           "active": true
         }
       ],
@@ -1506,7 +1513,7 @@
           "track": "Tokyo Expressway - South Clockwise",
           "raceDate": "2025-10-28T04:00:00.000Z",
           "practiceDate": "2025-10-21T04:00:00.000Z",
-          "includeInStats": false
+          "includeInStats": true
         },
         {
           "id": "qnwpqkr",
@@ -1534,8 +1541,8 @@
               "racePos": 7
             },
             "ji2ye5y": {
-              "qualiPos": 9,
-              "racePos": 9,
+              "qualiPos": 8,
+              "racePos": 8,
               "qDNP": true,
               "dnf": true
             },
@@ -1552,8 +1559,8 @@
               "racePos": 3
             },
             "t015pcd": {
-              "qualiPos": 8,
-              "racePos": 8,
+              "qualiPos": 9,
+              "racePos": 9,
               "qDNP": true,
               "dnf": true
             },
@@ -1568,6 +1575,12 @@
             "kwwtsni": {
               "qualiPos": 6,
               "racePos": 6
+            },
+            "784o53b": {
+              "qualiPos": 10,
+              "racePos": 10,
+              "qDNP": true,
+              "dnf": true
             }
           },
           "adjustments": {}
@@ -1610,6 +1623,12 @@
             "s9fn2f4": {
               "qualiPos": 5,
               "racePos": 4
+            },
+            "784o53b": {
+              "qualiPos": "",
+              "racePos": "",
+              "qDNP": true,
+              "dnf": true
             }
           },
           "adjustments": {}
@@ -1654,6 +1673,12 @@
             "s9fn2f4": {
               "qualiPos": 5,
               "racePos": 5
+            },
+            "784o53b": {
+              "qualiPos": "",
+              "racePos": "",
+              "qDNP": true,
+              "dnf": true
             }
           },
           "adjustments": {
@@ -1665,7 +1690,52 @@
         },
         {
           "raceId": "i0lisr6",
-          "byDriver": {},
+          "byDriver": {
+            "2yl1y7b": {
+              "qualiPos": 9,
+              "racePos": 9,
+              "dnf": true,
+              "qDNP": true
+            },
+            "ji2ye5y": {
+              "qualiPos": 2,
+              "racePos": 2
+            },
+            "yywv2ho": {
+              "qualiPos": 1,
+              "racePos": 3
+            },
+            "qpeqhcc": {
+              "qualiPos": 3,
+              "racePos": 1
+            },
+            "e1d4qi3": {
+              "qualiPos": 4,
+              "racePos": 4
+            },
+            "kwwtsni": {
+              "qualiPos": 7,
+              "racePos": 7
+            },
+            "9gzdt6u": {
+              "qualiPos": 6,
+              "racePos": 6
+            },
+            "s9fn2f4": {
+              "qualiPos": 5,
+              "racePos": 5
+            },
+            "t015pcd": {
+              "qualiPos": 10,
+              "racePos": 10,
+              "qDNP": true,
+              "dnf": true
+            },
+            "784o53b": {
+              "qualiPos": 8,
+              "racePos": 8
+            }
+          },
           "adjustments": {}
         },
         {
