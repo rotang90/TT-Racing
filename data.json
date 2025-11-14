@@ -1521,7 +1521,7 @@
           "track": "Autopolis - Short Course",
           "raceDate": "2025-11-11T05:00:00.000Z",
           "practiceDate": "2025-11-04T05:00:00.000Z",
-          "includeInStats": false
+          "includeInStats": true
         },
         {
           "id": "9w88lu6",
@@ -1740,8 +1740,56 @@
         },
         {
           "raceId": "qnwpqkr",
-          "byDriver": {},
-          "adjustments": {}
+          "byDriver": {
+            "2yl1y7b": {
+              "qualiPos": 9,
+              "racePos": 8
+            },
+            "784o53b": {
+              "qualiPos": 10,
+              "racePos": 10,
+              "qDNP": true,
+              "dnf": true
+            },
+            "ji2ye5y": {
+              "qualiPos": 2,
+              "racePos": 7
+            },
+            "yywv2ho": {
+              "qualiPos": 3,
+              "racePos": 3
+            },
+            "qpeqhcc": {
+              "qualiPos": 1,
+              "racePos": 1
+            },
+            "e1d4qi3": {
+              "qualiPos": 4,
+              "racePos": 9
+            },
+            "kwwtsni": {
+              "qualiPos": 8,
+              "racePos": 6
+            },
+            "t015pcd": {
+              "qualiPos": 7,
+              "racePos": 5
+            },
+            "9gzdt6u": {
+              "qualiPos": 6,
+              "racePos": 4
+            },
+            "s9fn2f4": {
+              "qualiPos": 5,
+              "racePos": 2
+            }
+          },
+          "adjustments": {
+            "yywv2ho": {
+              "points": 1,
+              "note": "Fastest Lap"
+            }
+          }
         },
         {
           "raceId": "9w88lu6",
