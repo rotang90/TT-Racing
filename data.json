@@ -1529,7 +1529,7 @@
           "track": "Nurburgring Nordschleife",
           "raceDate": "2025-11-25T05:00:00.000Z",
           "practiceDate": "2025-11-18T05:00:00.000Z",
-          "includeInStats": false
+          "includeInStats": true
         }
       ],
       "results": [
@@ -1793,7 +1793,52 @@
         },
         {
           "raceId": "9w88lu6",
-          "byDriver": {},
+          "byDriver": {
+            "2yl1y7b": {
+              "qualiPos": 8,
+              "racePos": 7
+            },
+            "784o53b": {
+              "qualiPos": 10,
+              "racePos": 8,
+              "qDNP": true
+            },
+            "ji2ye5y": {
+              "qualiPos": 1,
+              "racePos": 2
+            },
+            "yywv2ho": {
+              "qualiPos": 3,
+              "racePos": 3
+            },
+            "qpeqhcc": {
+              "qualiPos": 2,
+              "racePos": 1
+            },
+            "e1d4qi3": {
+              "qualiPos": 4,
+              "racePos": 5
+            },
+            "kwwtsni": {
+              "qualiPos": 6,
+              "racePos": 9,
+              "dnf": true
+            },
+            "9gzdt6u": {
+              "qualiPos": 7,
+              "racePos": 6
+            },
+            "s9fn2f4": {
+              "qualiPos": 5,
+              "racePos": 4
+            },
+            "t015pcd": {
+              "qualiPos": 9,
+              "racePos": 10,
+              "qDNP": true,
+              "dnf": true
+            }
+          },
           "adjustments": {}
         }
       ],
