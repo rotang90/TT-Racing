@@ -1796,7 +1796,7 @@
           "byDriver": {
             "2yl1y7b": {
               "qualiPos": 8,
-              "racePos": 7
+              "racePos": 6
             },
             "784o53b": {
               "qualiPos": 10,
@@ -1826,7 +1826,7 @@
             },
             "9gzdt6u": {
               "qualiPos": 7,
-              "racePos": 6
+              "racePos": 7
             },
             "s9fn2f4": {
               "qualiPos": 5,
@@ -1876,7 +1876,226 @@
       },
       "rules": "Vehicle: Mazda NR-A Miata (Custom Tune)\nAvailable Tires: Racing Soft, Intermediate, Wet\nQuali Time: 10 mins\nRace Time: 30 mins\nPit window: N/A\nRequires Tires: N/A",
       "seasonNo": 7
+    },
+    {
+      "name": "GR.3 - Holiday 2025",
+      "createdAt": 1765646494197,
+      "drivers": [
+        {
+          "id": "2yl1y7b",
+          "name": "Aaron Koepper",
+          "number": "69",
+          "color": "#e44bfb",
+          "active": true
+        },
+        {
+          "id": "ji2ye5y",
+          "name": "Brian Gray",
+          "number": "007",
+          "color": "#3333ff",
+          "active": true
+        },
+        {
+          "id": "yywv2ho",
+          "name": "Jackson King",
+          "number": "00",
+          "color": "#8f00f5",
+          "active": true
+        },
+        {
+          "id": "qpeqhcc",
+          "name": "Jackson Phillips",
+          "number": "13",
+          "color": "#ffc02e",
+          "active": true
+        },
+        {
+          "id": "e1d4qi3",
+          "name": "Rob Butler",
+          "number": "8",
+          "color": "#ff66cc",
+          "active": true
+        },
+        {
+          "id": "t015pcd",
+          "name": "Scott Holder",
+          "number": "28-3",
+          "color": "#01cdd0",
+          "active": true
+        },
+        {
+          "id": "9gzdt6u",
+          "name": "Scott Hull",
+          "number": "12",
+          "color": "#3600b3",
+          "active": true
+        },
+        {
+          "id": "s9fn2f4",
+          "name": "Steven Phillips",
+          "number": "113",
+          "color": "#000000",
+          "active": true
+        },
+        {
+          "id": "kwwtsni",
+          "name": "Ryan Eng",
+          "number": "4",
+          "color": "#ff0000",
+          "active": true
+        },
+        {
+          "id": "784o53b",
+          "name": "Andrew West",
+          "number": "17",
+          "color": "#e06c00",
+          "active": true
+        },
+        {
+          "id": "zijmiab",
+          "name": "Daniel Pineda",
+          "number": "9",
+          "color": "#0091ff",
+          "active": true
+        }
+      ],
+      "schedule": [
+        {
+          "id": "x9harn9",
+          "round": 1,
+          "track": "Yas Marina",
+          "raceDate": "2025-12-09T05:00:00.000Z",
+          "practiceDate": "2025-12-02T05:00:00.000Z",
+          "includeInStats": true
+        },
+        {
+          "id": "6epug6w",
+          "round": 2,
+          "track": "Circuit Gilles Villeneuve",
+          "raceDate": "2025-12-16T05:00:00.000Z",
+          "practiceDate": "2025-12-09T05:00:00.000Z",
+          "includeInStats": false
+        },
+        {
+          "id": "72te28x",
+          "round": 3,
+          "track": "Fuji Speedway",
+          "raceDate": "2025-12-23T05:00:00.000Z",
+          "practiceDate": "2025-12-16T05:00:00.000Z",
+          "includeInStats": false
+        },
+        {
+          "id": "i0lisr6",
+          "round": 4,
+          "track": "Redbull Ring",
+          "raceDate": "2025-12-30T05:00:00.000Z",
+          "practiceDate": "2025-12-23T05:00:00.000Z",
+          "includeInStats": false
+        }
+      ],
+      "results": [
+        {
+          "raceId": "x9harn9",
+          "byDriver": {
+            "e1d4qi3": {
+              "qualiPos": 4,
+              "racePos": 11,
+              "dnf": true
+            },
+            "2yl1y7b": {
+              "qualiPos": 10,
+              "racePos": 8
+            },
+            "784o53b": {
+              "qualiPos": 11,
+              "racePos": 10
+            },
+            "ji2ye5y": {
+              "qualiPos": 1,
+              "racePos": 1
+            },
+            "zijmiab": {
+              "qualiPos": 5,
+              "racePos": 5
+            },
+            "yywv2ho": {
+              "qualiPos": 3,
+              "racePos": 2
+            },
+            "qpeqhcc": {
+              "qualiPos": 2,
+              "racePos": 3
+            },
+            "kwwtsni": {
+              "qualiPos": 6,
+              "racePos": 9
+            },
+            "t015pcd": {
+              "qualiPos": 8,
+              "racePos": 6
+            },
+            "9gzdt6u": {
+              "qualiPos": 9,
+              "racePos": 7
+            },
+            "s9fn2f4": {
+              "qualiPos": 7,
+              "racePos": 4
+            }
+          },
+          "adjustments": {}
+        },
+        {
+          "raceId": "6epug6w",
+          "byDriver": {},
+          "adjustments": {}
+        },
+        {
+          "raceId": "72te28x",
+          "byDriver": {},
+          "adjustments": {}
+        },
+        {
+          "raceId": "i0lisr6",
+          "byDriver": {},
+          "adjustments": {}
+        }
+      ],
+      "points": {
+        "quali": [
+          11,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1,
+          0,
+          0
+        ],
+        "race": [
+          12,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1,
+          0,
+          0
+        ]
+      },
+      "rules": "Vehicle: Any Gr.3\nAvailable Tires: Racing Soft, Racing Hard, Intermediate, Wet\nQuali Time: 10 mins\nRace Time: 40 mins\nPit window: N/A\nRequired Tires: Racing Soft\nRequired Pits: 2\nYellow Flag Active: Yes",
+      "seasonNo": 8
     }
   ],
-  "activeSeasonIndex": 3
+  "activeSeasonIndex": 4
 }
