@@ -1948,7 +1948,7 @@
           "id": "784o53b",
           "name": "Andrew West",
           "number": "17",
-          "color": "#e06c00",
+          "color": "#fa891e",
           "active": true
         },
         {
@@ -1990,6 +1990,22 @@
           "track": "Redbull Ring",
           "raceDate": "2025-12-30T05:00:00.000Z",
           "practiceDate": "2025-12-23T05:00:00.000Z",
+          "includeInStats": true
+        },
+        {
+          "id": "z6h74r6",
+          "round": 5,
+          "track": "Dragontrail Seaside",
+          "raceDate": "2026-01-06T05:00:00.000Z",
+          "practiceDate": "2025-12-30T05:00:00.000Z",
+          "includeInStats": false
+        },
+        {
+          "id": "4d3wz6e",
+          "round": 6,
+          "track": "Placeholder",
+          "raceDate": "2026-01-13T05:00:00.000Z",
+          "practiceDate": "2026-01-06T05:00:00.000Z",
           "includeInStats": false
         }
       ],
@@ -2153,6 +2169,72 @@
         },
         {
           "raceId": "i0lisr6",
+          "byDriver": {
+            "2yl1y7b": {
+              "qualiPos": 8,
+              "racePos": 4
+            },
+            "784o53b": {
+              "qualiPos": 9,
+              "racePos": 9,
+              "qDNP": true,
+              "dnf": true
+            },
+            "ji2ye5y": {
+              "qualiPos": 1,
+              "racePos": 1
+            },
+            "zijmiab": {
+              "qualiPos": 4,
+              "racePos": 3
+            },
+            "yywv2ho": {
+              "qualiPos": 5,
+              "racePos": 5
+            },
+            "qpeqhcc": {
+              "qualiPos": 10,
+              "racePos": 10,
+              "qDNP": true,
+              "dnf": true
+            },
+            "e1d4qi3": {
+              "qualiPos": 2,
+              "racePos": 8
+            },
+            "kwwtsni": {
+              "qualiPos": 7,
+              "racePos": 7
+            },
+            "9gzdt6u": {
+              "qualiPos": 6,
+              "racePos": 6
+            },
+            "s9fn2f4": {
+              "qualiPos": 3,
+              "racePos": 2
+            },
+            "t015pcd": {
+              "qualiPos": 11,
+              "racePos": 11,
+              "qDNP": true,
+              "dnf": true
+            }
+          },
+          "adjustments": {
+            "e1d4qi3": {
+              "points": 1,
+              "note": "Fastest Lap"
+            }
+          }
+        },
+        {
+          "raceId": "z6h74r6",
+          "byDriver": {},
+          "adjustments": {}
+        },
+        {
+          "raceId": "4d3wz6e",
           "byDriver": {},
           "adjustments": {}
         }
