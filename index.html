@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TT Racing League — Viewer v14.3 (Read Only)</title>
+<title>TT Racing League — Viewer v14.7 (Read Only)</title>
 <style>
   :root{
     --bg:#f7f7fb;--panel:#fff;--text:#111827;--subtext:#374151;--muted:#6b7280;--border:#e5e7eb;
@@ -114,7 +114,7 @@
   <section class="grid" style="grid-template-columns:1fr;">
     <div class="panel">
       <h2>Round Results</h2>
-      <div class="muted">For each round: Qualifying order, Race 1 finish, Race 2 finish. DNP/DNF drivers are noted.</div>
+      <div class="muted">For each round: Qualifying order, Race 1 finish, Race 2 finish. DNP/DNF drivers are noted, and any adjustments are shown inline (e.g., fastest lap bonus).</div>
       <div class="hr"></div>
       <div id="roundResults"></div>
     </div>
@@ -156,7 +156,41 @@ function migrateSeasonToV14(season){
       if(v && v.race2Pos == null) v.race2Pos = "";
       if(v && v.dnf2 == null) v.dnf2 = false;
     });
-    if(!entry.adjustments) entry.adjustments = {};
+// Adjustments schema:
+// - v13 legacy: entry.adjustments = { [driverId]: {points, note} }
+// - v14+: entry.adjustments = { quali:{}, race1:{}, race2:{} }
+// Back-compat notes:
+// - Some data uses entry.adjustments.race (alias of race1)
+// Migration rule for legacy flat adjustments:
+// - If the note mentions quali/qualifying => Qualifying bucket
+// - If the note mentions race 2 / r2 => Race 2 bucket
+// - Otherwise => Race 1 bucket
+
+// Normalize adjustments object WITHOUT destroying legacy data.
+let adj = entry.adjustments;
+if(!adj) {
+  entry.adjustments = { quali:{}, race1:{}, race2:{} };
+} else {
+  const isV14 = (typeof adj === 'object') && (adj !== null) && ('quali' in adj || 'race1' in adj || 'race2' in adj || 'race' in adj);
+  if(!isV14){
+    // Legacy flat map => infer buckets by note text
+    const legacy = adj || {};
+    const buckets = { quali:{}, race1:{}, race2:{} };
+    for(const [id,a] of Object.entries(legacy)){
+      if(!a) continue;
+      const note = String(a.note||'').toLowerCase();
+      if(note.includes('quali') || note.includes('qualify') || note.includes('qualifying') || note.includes('qual')) buckets.quali[id]=a;
+      else if(note.includes('race 2') || note.includes('race2') || note.includes('r2')) buckets.race2[id]=a;
+      else buckets.race1[id]=a;
+    }
+    entry.adjustments = buckets;
+  } else {
+    // Already split (or partially) — normalize + support race alias
+    entry.adjustments.quali = entry.adjustments.quali || {};
+    entry.adjustments.race1 = entry.adjustments.race1 || entry.adjustments.race || {};
+    entry.adjustments.race2 = entry.adjustments.race2 || {};
+  }
+}
   });
   season.points = season.points || {quali:[10,9,8,7,6,5,4,3,2,1], race:[25,20,18,16,14,12,10,8,6,4,2,1]};
   if(!Array.isArray(season.points.quali)) season.points.quali = [10,9,8,7,6,5,4,3,2,1];
@@ -194,13 +228,19 @@ function computePointsByDriver(season){
       if(r1>0 && !vals.dnf1 && rp[r1-1]!=null) map[id].race1Pts += Number(rp[r1-1])||0;
       if(hasRace2 && r2>0 && !vals.dnf2 && rp[r2-1]!=null) map[id].race2Pts += Number(rp[r2-1])||0;
     }
-    if(entry.adjustments){
-      for(const [id,adj] of Object.entries(entry.adjustments)){
-        if(!map[id]) continue;
-        const val=(adj.points===""||adj.points==null)?0:Number(adj.points)||0;
-        map[id].adjPts += val;
-      }
+if(entry.adjustments){
+  // Sum adjustments across categories (quali / race1 / race2)
+  const buckets = ('quali' in entry.adjustments || 'race1' in entry.adjustments || 'race' in entry.adjustments || 'race2' in entry.adjustments)
+    ? [entry.adjustments.quali||{}, (entry.adjustments.race1||entry.adjustments.race||{}), entry.adjustments.race2||{}]
+    : [entry.adjustments||{}]; // legacy flat
+  for(const bucket of buckets){
+    for(const [id,adj] of Object.entries(bucket||{})){
+      if(!map[id]) continue;
+      const val=(adj.points===""||adj.points==null)?0:Number(adj.points)||0;
+      map[id].adjPts += val;
     }
+  }
+}
   });
 
   Object.values(map).forEach(d=> d.total = d.qualiPts + d.race1Pts + d.race2Pts + d.adjPts);
@@ -228,12 +268,17 @@ function computeStandingsAfterEachRound(season){
         if(r1>0 && !vals.dnf1 && rp[r1-1]!=null) cum[id]+=Number(rp[r1-1])||0;
         if(hasRace2 && r2>0 && !vals.dnf2 && rp[r2-1]!=null) cum[id]+=Number(rp[r2-1])||0;
       }
-      if(entry.adjustments){
-        for(const [id,adj] of Object.entries(entry.adjustments)){
-          const val=(adj.points===""||adj.points==null)?0:Number(adj.points)||0;
-          cum[id]=(cum[id]||0)+val;
-        }
-      }
+if(entry.adjustments){
+  const buckets = ('quali' in entry.adjustments || 'race1' in entry.adjustments || 'race' in entry.adjustments || 'race2' in entry.adjustments)
+    ? [entry.adjustments.quali||{}, (entry.adjustments.race1||entry.adjustments.race||{}), entry.adjustments.race2||{}]
+    : [entry.adjustments||{}]; // legacy flat
+  for(const bucket of buckets){
+    for(const [id,adj] of Object.entries(bucket||{})){
+      const val=(adj.points===""||adj.points==null)?0:Number(adj.points)||0;
+      cum[id]=(cum[id]||0)+val;
+    }
+  }
+}
     }
     const ordered=ids.map(id=>({id,total:cum[id]||0,name:(s.drivers||[]).find(d=>d.id===id)?.name||""}))
       .sort((a,b)=> b.total-a.total || (a.name||"" ).toLowerCase().localeCompare((b.name||"" ).toLowerCase()));
@@ -484,16 +529,16 @@ function renderSeason(season){
       <div class="results-grid" style="grid-template-columns:${roundHasRace2 ? 'repeat(3,1fr)' : 'repeat(2,1fr)'};">
         <div>
           <div class="muted" style="margin-bottom:6px;">Qualifying</div>
-          <table><thead><tr><th>Pos</th><th>Driver</th><th>Note</th></tr></thead><tbody class="qBody"></tbody></table>
+          <table><thead><tr><th>Pos</th><th>Driver</th><th>Pts</th><th>Note</th></tr></thead><tbody class="qBody"></tbody></table>
         </div>
         <div>
           <div class="muted" style="margin-bottom:6px;">Race 1</div>
-          <table><thead><tr><th>Pos</th><th>Driver</th><th>Note</th></tr></thead><tbody class="r1Body"></tbody></table>
+          <table><thead><tr><th>Pos</th><th>Driver</th><th>Pts</th><th>Note</th>${roundHasRace2 ? "" : "<th>Total</th>"}</tr></thead><tbody class="r1Body"></tbody></table>
         </div>
         ${roundHasRace2 ? `
         <div class="race2-block">
           <div class="muted" style="margin-bottom:6px;">Race 2</div>
-          <table><thead><tr><th>Pos</th><th>Driver</th><th>Note</th></tr></thead><tbody class="r2Body"></tbody></table>
+          <table><thead><tr><th>Pos</th><th>Driver</th><th>Pts</th><th>Note</th><th>Total</th></tr></thead><tbody class="r2Body"></tbody></table>
         </div>` : ``}
       </div>
       <div class="hr"></div>
@@ -501,44 +546,191 @@ function renderSeason(season){
     `;
     rr.appendChild(panel);
 
-    function fill(tbodySel, posField, flagField, flagLabel){
+
+
+    // --- Per-session points + weekly totals (DNP/DNF = 0) ---
+    const qp = season.points?.quali || [];
+    const rp = season.points?.race || [];
+    
+    const adj = entry.adjustments || {};
+    const hasSplit = (adj && (Object.prototype.hasOwnProperty.call(adj,'quali') || Object.prototype.hasOwnProperty.call(adj,'race1') || Object.prototype.hasOwnProperty.call(adj,'race2') || Object.prototype.hasOwnProperty.call(adj,'race')));
+    const legacyFlat = (!hasSplit && adj && typeof adj === 'object') ? adj : null;
+
+    // Buckets: support split format (quali/race1/race2) and alias (race -> race1)
+    const adjBuckets = {
+      quali: (hasSplit ? (adj.quali || {}) : {}),
+      race1: (hasSplit ? (adj.race1 || adj.race || {}) : {}),
+      race2: (hasSplit ? (adj.race2 || {}) : {})
+    };
+
+    // Infer legacy adjustment category from its note
+    const inferLegacyCat = (note) => {
+      const t = String(note||"").toLowerCase();
+      if(t.includes("quali") || t.includes("qualifying") || t.includes("qual")) return "quali";
+      if(t.includes("race 2") || t.includes("race2") || t.includes("r2")) return "race2";
+      if(t.includes("race")) return "race1";
+      // default to race1 (historic behavior)
+      return "race1";
+    };
+
+    const adjPts = (cat, id) => {
+      // Split format
+      const a = adjBuckets[cat]?.[id];
+      if(a){
+        const v = (a.points==="" || a.points==null) ? 0 : (Number(a.points)||0);
+        return v;
+      }
+      // Legacy flat format: scan all adjustments for this driver and sum those inferred for this category
+      if(legacyFlat && legacyFlat[id]){
+        const inferred = inferLegacyCat(legacyFlat[id].note);
+        if(inferred !== cat) return 0;
+        const v = (legacyFlat[id].points==="" || legacyFlat[id].points==null) ? 0 : (Number(legacyFlat[id].points)||0);
+        return v;
+      }
+      return 0;
+    };
+
+    const basePtsQuali = (id) => {
+      const v = entry.byDriver?.[id] || {};
+      const pos = Number(v.qualiPos)||0;
+      if(pos<=0) return 0;
+      if(v.qDNP) return 0;
+      const p = qp[pos-1];
+      return (p==null) ? 0 : (Number(p)||0);
+    };
+    const basePtsRace1 = (id) => {
+      const v = entry.byDriver?.[id] || {};
+      const pos = Number(v.race1Pos ?? v.racePos)||0;
+      if(pos<=0) return 0;
+      if(v.dnf1) return 0;
+      const p = rp[pos-1];
+      return (p==null) ? 0 : (Number(p)||0);
+    };
+    const basePtsRace2 = (id) => {
+      const v = entry.byDriver?.[id] || {};
+      const pos = Number(v.race2Pos)||0;
+      if(pos<=0) return 0;
+      if(v.dnf2) return 0;
+      const p = rp[pos-1];
+      return (p==null) ? 0 : (Number(p)||0);
+    };
+
+    const sessionTotal = {
+      quali: (id) => basePtsQuali(id) + adjPts('quali', id),
+      race1: (id) => basePtsRace1(id) + adjPts('race1', id),
+      race2: (id) => basePtsRace2(id) + adjPts('race2', id)
+    };
+
+    const weekTotals = {};
+    for(const id of Object.keys(entry.byDriver||{})){
+      let total = 0;
+      total += basePtsQuali(id);
+      total += basePtsRace1(id);
+      if(roundHasRace2) total += basePtsRace2(id);
+      total += adjPts("quali", id);
+      total += adjPts("race1", id);
+      if(roundHasRace2) total += adjPts("race2", id);
+      weekTotals[id] = total;
+    }
+    function fill(tbodySel, posField, flagField, flagLabel, adjCat, pointsArr, weekTotals, sessionPts, showTotal) {
       const tbody=panel.querySelector(tbodySel);
       tbody.innerHTML="";
       const rows = Object.entries(entry.byDriver||{})
         .map(([id,vals])=>({id, vals, pos:Number(vals[posField] ?? (posField==="race1Pos"? vals.racePos : ""))||0}))
         .filter(x=>x.pos>0)
         .sort((a,b)=>a.pos-b.pos);
+
+      // Show ONLY the adjustments that apply to this session (quali / race1 / race2)
+      const getBucket = ()=>{
+        const a = entry.adjustments || {};
+        const isV14 = ('quali' in a) || ('race1' in a) || ('race' in a) || ('race2' in a);
+        if(isV14){
+          if(adjCat==='race1') return (a.race1 || a.race || {});
+          return (a[adjCat] || {});
+        }
+        // legacy flat adjustments: treat as race1
+        return adjCat==="race1" ? (a||{}) : {};
+      };
+      const adjById = getBucket();
+      const adjText = (driverId)=>{
+        const a = adjById[driverId];
+        if(!a) return "";
+        const ptsRaw = a.points;
+        const pts = (ptsRaw===""||ptsRaw==null) ? null : (Number(ptsRaw)||0);
+        const note = (a.note||"").trim();
+        if(pts==null && !note) return "";
+        if(pts==null) return `Adj: ${escapeHtml(note)}`;
+        const sign = pts>0 ? "+" : "";
+        return `Adj: ${sign}${pts}${note ? " ("+escapeHtml(note)+")" : ""}`;
+      };
+
       if(rows.length===0){
         const tr=document.createElement("tr");
-        tr.innerHTML=`<td colspan="3" class="muted">No results entered.</td>`;
+        const span = showTotal ? 5 : 4;
+        tr.innerHTML=`<td colspan="${span}" class="muted">No results entered.</td>`;
         tbody.appendChild(tr);
         return;
       }
       rows.forEach(rw=>{
         const d=byId[rw.id] || {name:"Unknown", number:""};
-        const note = rw.vals[flagField] ? flagLabel : "";
+        const parts = [];
+        if(rw.vals[flagField]) parts.push(flagLabel);
+        const adj = adjText(rw.id);
+        if(adj) parts.push(adj);
+        const note = parts.join(" · ");
         const tr=document.createElement("tr");
-        tr.innerHTML = `<td>P${rw.pos}</td><td><span class="number-chip"><span class="color-dot" style="background:${d.color||"#888"}"></span>${escapeHtml(d.name)}</span></td><td class="muted">${note}</td>`;
+        const totalCell = showTotal ? `<td><strong>${weekTotals[rw.id] ?? 0}</strong></td>` : ``;
+        tr.innerHTML = `<td>P${rw.pos}</td>
+          <td><span class="number-chip"><span class="color-dot" style="background:${d.color||"#888"}"></span>${escapeHtml(d.name)}</span></td>
+          <td><strong>${sessionPts(rw.id)}</strong></td>
+          <td class="muted">${note || "—"}</td>${totalCell}`;
         tbody.appendChild(tr);
       });
     }
 
-    fill(".qBody","qualiPos","qDNP","DNP");
-    fill(".r1Body","race1Pos","dnf1","DNF");
-    if(roundHasRace2) fill(".r2Body","race2Pos","dnf2","DNF");
+    fill(".qBody","qualiPos","qDNP","DNP","quali", qp, weekTotals, basePtsQuali, false);
+    fill(".r1Body","race1Pos","dnf1","DNF","race1", rp, weekTotals, basePtsRace1, !roundHasRace2);
+    if(roundHasRace2) fill(".r2Body","race2Pos","dnf2","DNF","race2", rp, weekTotals, basePtsRace2, true);
 
-    const adjs = Object.entries(entry.adjustments||{}).filter(([id,a])=> (a && (a.points!=="" || (a.note||"").trim()!=="")));
-    if(adjs.length){
-      const chunks = adjs.map(([id,a])=>{
-        const d=byId[id] || {name:"Unknown"};
-        const pts = (a.points===""||a.points==null) ? 0 : Number(a.points)||0;
-        const note = (a.note||"").trim();
-        return `${escapeHtml(d.name)}: ${pts}${note? " ("+escapeHtml(note)+")":""}`;
-      });
-      panel.querySelector(".adjLine").innerHTML = "<strong>Adjustments:</strong> " + chunks.join(" · ");
-    } else {
-      panel.querySelector(".adjLine").textContent = "Adjustments: —";
-    }
+    // Summary line (optional) — split by session
+{
+  const a = entry.adjustments || {};
+  const isV14 = ('quali' in a) || ('race1' in a) || ('race' in a) || ('race2' in a);
+  const buckets = isV14 ? {
+    quali: a.quali||{},
+    race1: (a.race1||a.race||{}),
+    race2: a.race2||{}
+  } : { // legacy flat => treat as race1
+    quali: {},
+    race1: a||{},
+    race2: {}
+  };
+
+  const fmtBucket = (label, bucket)=>{
+    const rows = Object.entries(bucket||{})
+      .filter(([_,x])=> x && (x.points!=="" || (x.note||"").trim()!==""));
+    if(!rows.length) return null;
+    const chunks = rows.map(([id,x])=>{
+      const d=byId[id] || {name:"Unknown"};
+      const pts = (x.points===""||x.points==null) ? null : (Number(x.points)||0);
+      const sign = (pts!=null && pts>0) ? "+" : "";
+      const note = (x.note||"").trim();
+      const ptsTxt = (pts==null) ? "" : `${sign}${pts}`;
+      const body = ptsTxt ? ptsTxt : "0";
+      return `${escapeHtml(d.name)}: ${body}${note? " ("+escapeHtml(note)+")":""}`;
+    });
+    return `<strong>${label}:</strong> ${chunks.join(" · ")}`;
+  };
+
+  const lines = [];
+  const qLine = fmtBucket("Qualifying Adj.", buckets.quali); if(qLine) lines.push(qLine);
+  const r1Line = fmtBucket("Race 1 Adj.", buckets.race1); if(r1Line) lines.push(r1Line);
+  if(roundHasRace2){
+    const r2Line = fmtBucket("Race 2 Adj.", buckets.race2); if(r2Line) lines.push(r2Line);
+  }
+  panel.querySelector(".adjLine").innerHTML = lines.length ? lines.join("<br>") : "Adjustments: —";
+}
+
   });
 }
 
