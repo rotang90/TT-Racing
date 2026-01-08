@@ -2672,7 +2672,7 @@
           0
         ]
       },
-      "rules": "Vehicle: Mazda NR-A Miata (Custom Tune)\nAvailable Tires: Racing Soft, Intermediate, Wet\nQuali Time: 10 mins\nRace Time: 30 mins\nPit window: N/A\nRequires Tires: N/A",
+      "rules": "Vehicle: Mazda NR-A Miata (Custom Tune)\nAvailable Tires: Racing Hard, Intermediate, Wet\nQuali Time: 10 mins\nRace Time: 30 mins\nPit window: N/A\nRequires Tires: N/A",
       "seasonNo": 7
     },
     {
@@ -2800,7 +2800,7 @@
           "track": "Dragontrail Seaside",
           "raceDate": "2026-01-06T05:00:00.000Z",
           "practiceDate": "2025-12-30T05:00:00.000Z",
-          "includeInStats": false,
+          "includeInStats": true,
           "twoRaces": false
         },
         {
@@ -3173,8 +3173,106 @@
         },
         {
           "raceId": "z6h74r6",
-          "byDriver": {},
-          "adjustments": {}
+          "byDriver": {
+            "t015pcd": {
+              "qualiPos": 7,
+              "race1Pos": 9,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": true,
+              "dnf2": false
+            },
+            "2yl1y7b": {
+              "qualiPos": 9,
+              "race1Pos": 8,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "784o53b": {
+              "qualiPos": 11,
+              "race1Pos": 11,
+              "race2Pos": "",
+              "qDNP": true,
+              "dnf1": true,
+              "dnf2": false
+            },
+            "ji2ye5y": {
+              "qualiPos": 4,
+              "race1Pos": 4,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "zijmiab": {
+              "qualiPos": 5,
+              "race1Pos": 6,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "yywv2ho": {
+              "qualiPos": 2,
+              "race1Pos": 3,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "qpeqhcc": {
+              "qualiPos": 10,
+              "race1Pos": 10,
+              "race2Pos": "",
+              "qDNP": true,
+              "dnf1": true,
+              "dnf2": false
+            },
+            "e1d4qi3": {
+              "qualiPos": 1,
+              "race1Pos": 1,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "kwwtsni": {
+              "qualiPos": 8,
+              "race1Pos": 7,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "9gzdt6u": {
+              "qualiPos": 6,
+              "race1Pos": 5,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "s9fn2f4": {
+              "qualiPos": 3,
+              "race1Pos": 2,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            }
+          },
+          "adjustments": {
+            "e1d4qi3": {
+              "points": 1,
+              "note": "Fastest Quali Lap"
+            },
+            "s9fn2f4": {
+              "points": 1,
+              "note": "Fastest Race Lap"
+            }
+          }
         },
         {
           "raceId": "4d3wz6e",
@@ -3214,7 +3312,7 @@
           0
         ]
       },
-      "rules": "Vehicle: Any Gr.3\nAvailable Tires: Racing Soft, Racing Hard, Intermediate, Wet\nQuali Time: 10 mins\nRace Time: 40 mins\nPit window: N/A\nRequired Tires: Racing Soft\nRequired Pits: 2\nYellow Flag Active: Yes",
+      "rules": "Vehicle: Any Gr.3\nAvailable Tires: Racing Soft, Racing Hard, Intermediate, Wet\nQuali Time: 10 mins\nRace Time: 40 mins\nPit window: N/A\nRequired Tires: Racing Hard\nRequired Pits: 2\nYellow Flag Active: Yes",
       "seasonNo": 8
     },
     {
@@ -3310,6 +3408,11 @@
       "results": [],
       "points": {
         "quali": [
+          16,
+          15,
+          14,
+          13,
+          12,
           11,
           10,
           9,
@@ -3320,12 +3423,15 @@
           4,
           3,
           2,
-          1,
-          0,
-          0
+          1
         ],
         "race": [
+          17,
+          15,
+          14,
+          13,
           12,
+          11,
           10,
           9,
           8,
@@ -3335,14 +3441,12 @@
           4,
           3,
           2,
-          1,
-          0,
-          0
+          1
         ]
       },
       "rules": "Vehicle: Any Gr.3\nAvailable Tires: Racing Soft, Racing Hard, Intermediate, Wet\nQuali Time: 10 mins\nRace Time: 40 mins\nPit window: N/A\nRequired Tires: Racing Soft\nRequired Pits: 2\nYellow Flag Active: Yes",
       "seasonNo": 8
     }
   ],
-  "activeSeasonIndex": 5
+  "activeSeasonIndex": 4
 }
