@@ -2806,10 +2806,10 @@
         {
           "id": "4d3wz6e",
           "round": 6,
-          "track": "Placeholder",
+          "track": "Deep Forest",
           "raceDate": "2026-01-13T05:00:00.000Z",
           "practiceDate": "2026-01-06T05:00:00.000Z",
-          "includeInStats": false,
+          "includeInStats": true,
           "twoRaces": false
         }
       ],
@@ -3276,8 +3276,102 @@
         },
         {
           "raceId": "4d3wz6e",
-          "byDriver": {},
-          "adjustments": {}
+          "byDriver": {
+            "yywv2ho": {
+              "qualiPos": 1,
+              "race1Pos": 3,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "2yl1y7b": {
+              "qualiPos": 8,
+              "race1Pos": 8,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "784o53b": {
+              "qualiPos": 10,
+              "race1Pos": 10,
+              "race2Pos": "",
+              "qDNP": true,
+              "dnf1": true,
+              "dnf2": false
+            },
+            "ji2ye5y": {
+              "qualiPos": 2,
+              "race1Pos": 1,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "zijmiab": {
+              "qualiPos": 6,
+              "race1Pos": 5,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "qpeqhcc": {
+              "qualiPos": 11,
+              "race1Pos": 11,
+              "race2Pos": "",
+              "qDNP": true,
+              "dnf1": true,
+              "dnf2": false
+            },
+            "e1d4qi3": {
+              "qualiPos": 3,
+              "race1Pos": 2,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "kwwtsni": {
+              "qualiPos": 9,
+              "race1Pos": 9,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "t015pcd": {
+              "qualiPos": 5,
+              "race1Pos": 6,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "9gzdt6u": {
+              "qualiPos": 7,
+              "race1Pos": 7,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            },
+            "s9fn2f4": {
+              "qualiPos": 4,
+              "race1Pos": 4,
+              "race2Pos": "",
+              "qDNP": false,
+              "dnf1": false,
+              "dnf2": false
+            }
+          },
+          "adjustments": {
+            "yywv2ho": {
+              "points": 2,
+              "note": "Fastest Race Lap, Fastest Quali Lap"
+            }
+          }
         }
       ],
       "points": {
